@@ -3,6 +3,7 @@ package main
 // [GO] insert in parentheses all required modules (like npm library) and install it with `go get .`
 import (
 	"github.com/gin-gonic/gin"
+	"main/database"
 	"main/routes/albums"
 	"main/routes/hello"
 )
@@ -16,9 +17,12 @@ func main() {
 	router.POST("/albums", albums.PostAlbums)
 
 	router.GET("/hello", hello.SayHello)
-	// Starts the HTTP server on the specified address and port.
-	err := router.Run("localhost:8080")
-	if err != nil {
-		return
-	}
+	//Starts the HTTP server on the specified address and port.
+	//err := router.Run("localhost:8080")
+	//if err != nil {
+	//	return
+	//}
+
+	sql.Main()
+
 }
