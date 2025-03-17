@@ -1,4 +1,4 @@
-package sql
+package database
 
 import (
 	"database/sql"
@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-var db *sql.DB
+var DB *sql.DB
 
 func Main() {
 
@@ -20,15 +20,22 @@ func Main() {
 	}
 
 	var err error
-	db, err = sql.Open("mysql", config.FormatDSN())
+	DB, err = sql.Open("mysql", config.FormatDSN())
 	if err != nil {
 		panic(err)
 	}
 
-	pingErr := db.Ping()
+	pingErr := DB.Ping()
 	if pingErr != nil {
 		panic(pingErr)
 	}
 
 	fmt.Println("[SQL] Connected to database")
+}
+
+func verifyConnectionState() (bool, error) {
+	if DB == nil {
+		return false, fmt.Errorf("[SQL] Database connection is not established")
+	}
+	return true, nil
 }

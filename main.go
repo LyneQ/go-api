@@ -9,6 +9,8 @@ import (
 )
 
 func main() {
+
+	database.Main()
 	// Creates a new instance of the Gin router with default middleware (logger and recovery)
 	router := gin.Default()
 	// Defines a GET HTTP route `/albums` and associates it with the handler function `getAlbums`
@@ -18,11 +20,9 @@ func main() {
 
 	router.GET("/hello", hello.SayHello)
 	//Starts the HTTP server on the specified address and port.
-	//err := router.Run("localhost:8080")
-	//if err != nil {
-	//	return
-	//}
-
-	sql.Main()
+	err := router.Run("localhost:8080")
+	if err != nil {
+		return
+	}
 
 }
